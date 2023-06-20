@@ -15,10 +15,10 @@ public class CalcularPI {
         
         int dardosPorTrabajador = NUMERO_TOTAL_DARDOS / NUMERO_TRABAJADORES;
         
-        List<Double> estimaciones = new ArrayList<>(NUMERO_TRABAJADORES);
-        estimaciones.addAll(Collections.singleton((double)dardosPorTrabajador));
-        
-        double estimacionDePI = estimaciones.parallelStream().mapToDouble(CalcularPi::estimarPi).sum();
+        double estimacionDePI = IntStream.range(0, NUMERO_TRABAJADORES)
+                .map(trabajador -> dardosPorTrabajador)
+                .parallel()
+                .mapToDouble(CalcularPi::estimarPi).sum()/NUMERO_TRABAJADORES;
 
         System.out.println("Mi estimación de PI vale: " + estimacionDePI);
     }
