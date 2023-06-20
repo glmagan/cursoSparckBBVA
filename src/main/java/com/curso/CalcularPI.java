@@ -18,7 +18,7 @@ public class CalcularPI {
         List<Double> estimaciones = new ArrayList<>(NUMERO_TRABAJADORES);
         estimaciones.addAll(Collections.singleton((double)dardosPorTrabajador));
         
-        double estimacionDePI = estimaciones.stream().mapToDouble(CalcularPi::estimarPi).sum();
+        double estimacionDePI = estimaciones.parallelStream().mapToDouble(CalcularPi::estimarPi).sum();
 
         System.out.println("Mi estimación de PI vale: " + estimacionDePI);
     }
